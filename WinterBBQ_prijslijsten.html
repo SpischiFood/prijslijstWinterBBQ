@@ -1,0 +1,1358 @@
+<!doctype html>
+<html lang="nl-BE" data-saved-copy="true">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#473f34" />
+    <title>Winter BBQ · Prijslijsten · Chiro Tisselt</title>
+    <style>
+      /* WINTER BBQ · Chiro Tisselt
+   A4 staand: elke .sheet is exact één pagina van 210 × 297 mm.
+   Kleur, tekstgrootte en tussenruimte zijn hier centraal aanpasbaar. */
+      :root {
+        --brown: #473f34;
+        --red: #df080d;
+        --snow: #fff;
+        --wood: #d39850;
+        --ink: #332d25;
+        --display:
+          Impact, Haettenschweiler, "Arial Narrow", "Arial Black", sans-serif;
+        --body: Arial, Helvetica, sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        background: #eae7e2;
+      }
+      body {
+        margin: 0;
+        color: var(--snow);
+        font-family: var(--body);
+      }
+      button {
+        font: inherit;
+        cursor: pointer;
+      }
+      .svg-library {
+        position: absolute;
+        width: 0;
+        height: 0;
+        overflow: hidden;
+      }
+      .controls {
+        position: relative;
+        z-index: 10;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        padding: 18px 28px;
+        background: #fff;
+        color: var(--brown);
+        border-bottom: 1px solid #d9d3ca;
+      }
+      .controls-brand,
+      .controls-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .controls-brand {
+        font-size: 13px;
+        flex-wrap: wrap;
+      }
+      .controls-brand strong {
+        letter-spacing: 1.1px;
+        font-size: 12px;
+      }
+      .brand-dot {
+        width: 10px;
+        height: 10px;
+        background: var(--red);
+        border-radius: 50%;
+      }
+      .controls-divider {
+        width: 1px;
+        height: 18px;
+        margin: 0 5px;
+        background: #d9d3ca;
+      }
+      .controls button {
+        border: 1px solid #d9d3ca;
+        background: #fff;
+        color: var(--brown);
+        border-radius: 5px;
+        padding: 11px 15px;
+        font-size: 12px;
+        font-weight: 700;
+      }
+      .controls button:hover,
+      .controls button[aria-pressed="true"] {
+        background: #f0ede7;
+      }
+      .controls .primary {
+        background: var(--red);
+        border-color: var(--red);
+        color: #fff;
+      }
+      .controls .primary:hover {
+        background: #be060b;
+      }
+      .controls .primary span {
+        margin-left: 8px;
+      }
+      .screen-notes {
+        color: #615a51;
+        text-align: center;
+        padding: 23px 20px 3px;
+        font-size: 12px;
+        line-height: 1.6;
+      }
+      .screen-notes p {
+        margin: 0 0 4px;
+      }
+      .screen-notes strong {
+        color: var(--brown);
+      }
+      #status {
+        color: #a0090d;
+        font-weight: 700;
+        min-height: 19px;
+      }
+      #edit-help {
+        color: #18599b;
+      }
+      .sheets {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 32px;
+        padding: 20px 20px 48px;
+      }
+      .sheet {
+        width: 210mm;
+        height: 297mm;
+        flex: 0 0 auto;
+        position: relative;
+        isolation: isolate;
+        background: var(--brown);
+        overflow: hidden;
+        box-shadow: 0 12px 40px #32281b25;
+      }
+      .page-frame {
+        position: absolute;
+        z-index: -1;
+        inset: 7mm;
+        border: 0.3mm solid #ffffff40;
+        pointer-events: none;
+      }
+      .snow-speckles {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        opacity: 0.7;
+        pointer-events: none;
+        background-image:
+          radial-gradient(ellipse at 7% 9%, #fff 0 0.55mm, transparent 0.7mm),
+          radial-gradient(ellipse at 92% 14%, #fff 0 0.55mm, transparent 0.8mm),
+          radial-gradient(ellipse at 5% 37%, #fff 0 0.35mm, transparent 0.6mm),
+          radial-gradient(ellipse at 96% 44%, #fff 0 0.65mm, transparent 0.9mm),
+          radial-gradient(ellipse at 4% 68%, #fff 0 0.55mm, transparent 0.8mm),
+          radial-gradient(ellipse at 95% 72%, #fff 0 0.35mm, transparent 0.6mm),
+          radial-gradient(ellipse at 8% 82%, #fff 0 0.65mm, transparent 1mm),
+          radial-gradient(ellipse at 91% 87%, #fff 0 0.6mm, transparent 0.9mm),
+          radial-gradient(ellipse at 38% 5%, #fff 0 0.3mm, transparent 0.5mm),
+          radial-gradient(ellipse at 67% 82%, #fff 0 0.35mm, transparent 0.65mm);
+      }
+      .page-header {
+        text-align: center;
+        position: relative;
+        margin: 14mm 14mm 0;
+      }
+      .organiser {
+        margin: 0 0 1mm;
+        font-size: 11px;
+        line-height: 1.2;
+        font-weight: 900;
+        letter-spacing: 2.5px;
+      }
+      .organiser span {
+        font-weight: 400;
+        font-size: 9px;
+        margin-left: 4px;
+        letter-spacing: 1.7px;
+      }
+      .event-logo {
+        display: block;
+        width: 100%;
+        height: 37mm;
+        overflow: visible;
+      }
+      .title-line {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 4mm;
+        margin-top: 2mm;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 5px;
+      }
+      .title-line svg {
+        width: 6mm;
+        height: 6mm;
+      }
+      h1 {
+        font-family: var(--display);
+        font-size: 78px;
+        font-weight: 900;
+        line-height: 1.05;
+        letter-spacing: 3px;
+        margin: 1mm 0 2mm;
+      }
+      .tagline {
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 1.6px;
+        margin: 0;
+        line-height: 1.4;
+      }
+      .menu {
+        position: relative;
+        z-index: 2;
+        margin: 9mm 17mm 0;
+      }
+      .menu-section {
+        margin: 0;
+      }
+      .menu-section + .menu-section {
+        margin-top: 8mm;
+      }
+      .wood-label {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        min-height: 11mm;
+        margin: 0 0 1.5mm;
+        padding: 1.8mm 6mm;
+        color: var(--ink);
+        font-family: var(--display);
+        font-size: 25px;
+        font-weight: 400;
+        line-height: 1.15;
+        letter-spacing: 0.7px;
+        text-transform: uppercase;
+        background-color: var(--wood);
+        background-image: repeating-linear-gradient(
+          178deg,
+          transparent 0 5mm,
+          #965c1d38 5.15mm 5.4mm,
+          transparent 5.6mm 7mm
+        );
+        border: 0.4mm solid #aa712c;
+        border-radius: 1mm 0.5mm 0.8mm 0.4mm;
+      }
+      .wood-label::before {
+        content: "";
+        position: absolute;
+        top: -1.2mm;
+        left: -0.4mm;
+        right: -0.4mm;
+        height: 2.2mm;
+        background: #fff;
+        clip-path: polygon(
+          0 38%,
+          3% 18%,
+          6% 33%,
+          9% 0,
+          13% 24%,
+          17% 8%,
+          20% 25%,
+          25% 12%,
+          29% 40%,
+          33% 14%,
+          38% 28%,
+          43% 0,
+          48% 26%,
+          53% 17%,
+          58% 39%,
+          63% 9%,
+          68% 22%,
+          72% 0,
+          77% 28%,
+          81% 11%,
+          85% 38%,
+          90% 14%,
+          95% 30%,
+          100% 12%,
+          100% 78%,
+          97% 100%,
+          92% 79%,
+          87% 86%,
+          83% 71%,
+          78% 85%,
+          73% 69%,
+          67% 80%,
+          63% 67%,
+          56% 88%,
+          52% 71%,
+          47% 82%,
+          43% 61%,
+          39% 82%,
+          34% 69%,
+          29% 88%,
+          24% 73%,
+          19% 86%,
+          14% 66%,
+          10% 88%,
+          5% 72%,
+          0 87%
+        );
+      }
+      .wood-label::after {
+        content: "";
+        position: absolute;
+        left: 2mm;
+        top: 4.6mm;
+        width: 1mm;
+        height: 1mm;
+        border-radius: 50%;
+        background: #744c26;
+        box-shadow: 167mm 0 #744c26;
+      }
+      .menu-row {
+        display: flex;
+        align-items: center;
+        gap: 4mm;
+        min-height: 19mm;
+        break-inside: avoid;
+      }
+      .item-name {
+        min-width: 0;
+        font-size: 23px;
+        line-height: 1.2;
+        font-weight: 700;
+      }
+      .leader {
+        min-width: 5mm;
+        flex: 1;
+        align-self: center;
+        border-bottom: 0.4mm dotted #ffffff4d;
+        transform: translateY(1mm);
+      }
+      .price {
+        flex: 0 0 32mm;
+        min-height: 11mm;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        text-align: right;
+        white-space: nowrap;
+        font-size: 28px;
+        line-height: 1.2;
+        font-family: var(--display);
+        font-weight: 400;
+        letter-spacing: 0.4px;
+        font-variant-numeric: tabular-nums;
+      }
+      .winter-footer {
+        position: absolute;
+        z-index: 1;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 53mm;
+      }
+      .snow-drift {
+        position: absolute;
+        width: 100%;
+        height: 37mm;
+        bottom: 0;
+      }
+      .footer-snowman {
+        position: absolute;
+        left: 9mm;
+        bottom: -7mm;
+        width: 53mm;
+        height: 59mm;
+        transform: rotate(-7deg);
+      }
+      .footer-fork {
+        position: absolute;
+        left: 53mm;
+        bottom: 3mm;
+        width: 22mm;
+        height: 50mm;
+        transform: rotate(17deg);
+      }
+      .footer-mug {
+        position: absolute;
+        left: 56mm;
+        bottom: 9mm;
+        width: 27mm;
+        height: 29mm;
+        transform: rotate(8deg);
+      }
+      .footer-sign {
+        position: absolute;
+        right: 15mm;
+        bottom: 14mm;
+        width: 99mm;
+        text-align: center;
+        color: var(--brown);
+        display: flex;
+        flex-direction: column;
+        gap: 1.8mm;
+      }
+      .footer-sign span:first-child {
+        color: #fff;
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 2px;
+      }
+      .footer-sign strong {
+        position: relative;
+        display: block;
+        padding: 2mm 4mm;
+        background: var(--wood);
+        border: 0.4mm solid #aa712c;
+        font-family: var(--display);
+        font-size: 33px;
+        font-weight: 400;
+        line-height: 1.1;
+        letter-spacing: 1.5px;
+        transform: rotate(-2deg);
+        box-shadow: 0 1.3mm 0 #976329;
+      }
+      .footer-sign span:last-child {
+        margin-top: 1mm;
+        font-size: 9px;
+        letter-spacing: 2.5px;
+        font-weight: 900;
+      }
+      .drinks-menu {
+        margin-top: 7mm;
+      }
+      .drinks-menu .menu-section + .menu-section {
+        margin-top: 4mm;
+      }
+      .drinks-menu .wood-label {
+        min-height: 9mm;
+        font-size: 22px;
+        padding-top: 1.1mm;
+        padding-bottom: 1.1mm;
+        margin-bottom: 1mm;
+      }
+      .drinks-menu .wood-label::after {
+        top: 3.6mm;
+      }
+      .drinks-menu .menu-row {
+        min-height: 9.7mm;
+      }
+      .drinks-menu .item-name {
+        font-size: 20px;
+      }
+      .drinks-menu .price {
+        font-size: 25px;
+        min-height: 9mm;
+      }
+      .editing [data-editable] {
+        outline: 1px dashed #8fc9ff;
+        outline-offset: 3px;
+        cursor: text;
+      }
+      .editing [data-editable]:focus {
+        outline: 2px solid #8fc9ff;
+        background: #85c5ff18;
+      }
+      .layout-warning {
+        outline: 3px solid #df080d;
+      }
+      [hidden] {
+        display: none !important;
+      }
+      @media screen and (min-width: 1740px) {
+        .sheets {
+          flex-direction: row;
+          align-items: flex-start;
+          justify-content: center;
+        }
+      }
+      @media screen and (max-width: 840px) {
+        .controls {
+          padding: 16px;
+        }
+        .controls-actions {
+          flex-wrap: wrap;
+        }
+        .screen-notes {
+          text-align: left;
+        }
+        .sheets {
+          align-items: flex-start;
+          overflow-x: auto;
+          padding: 16px;
+        }
+      }
+      @page {
+        size: A4 portrait;
+        margin: 0;
+      }
+      @media print {
+        html,
+        body {
+          margin: 0 !important;
+          padding: 0 !important;
+          background: #fff;
+        }
+        body {
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+        .controls,
+        .screen-notes {
+          display: none !important;
+        }
+        .sheets {
+          display: block;
+          padding: 0;
+          margin: 0;
+        }
+        .sheet {
+          width: 210mm;
+          height: 297mm;
+          margin: 0;
+          box-shadow: none;
+          break-inside: avoid;
+          break-after: page;
+          page-break-after: always;
+        }
+        .sheet:last-child {
+          break-after: auto;
+          page-break-after: auto;
+        }
+        [data-editable] {
+          outline: none !important;
+        }
+        .layout-warning {
+          outline: none;
+        }
+      }
+
+      /* Drie aparte prijslijsten: de drankbar heeft grotere regels;
+   de jeneverbar houdt ruimte voor shotjes, warme dranken en combinaties. */
+      .bar-sheet h1 {
+        font-size: 72px;
+      }
+      .jenever-sheet h1 {
+        font-size: 64px;
+      }
+      .bar-menu .menu-row {
+        min-height: 16mm;
+      }
+      .bar-menu .item-name {
+        font-size: 22px;
+      }
+      .bar-menu .price {
+        font-size: 28px;
+      }
+      .jenever-menu .wood-label {
+        font-size: 20px;
+      }
+      .jenever-menu .menu-row {
+        min-height: 9.7mm;
+      }
+      .jenever-menu .item-name {
+        font-size: 19px;
+      }
+      .item {
+        min-width: 0;
+      }
+      .item .item-name {
+        display: block;
+      }
+      .item-note {
+        display: block;
+        margin-top: 0.7mm;
+        font-size: 12px;
+        line-height: 1.3;
+        color: #eee1ce;
+      }
+      .section-note {
+        margin: 1mm 0 0;
+        font-size: 11px;
+        line-height: 1.4;
+        color: #eee1ce;
+      }
+      @media screen and (min-width: 1740px) {
+        .sheets {
+          flex-wrap: wrap;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <aside class="controls" aria-label="Prijslijsten aanpassen en afdrukken">
+      <div class="controls-brand">
+        <span class="brand-dot" aria-hidden="true"></span
+        ><strong>CHIRO TISSELT</strong><span class="controls-divider"></span
+        ><span>Winter BBQ · prijslijsten</span>
+      </div>
+      <div class="controls-actions">
+        <button id="edit-button" type="button" aria-pressed="false">
+          Tekst & prijzen aanpassen
+        </button>
+        <button id="save-button" type="button">Bewaar mijn HTML</button>
+        <button id="print-button" class="primary" type="button">
+          Afdrukken / PDF <span aria-hidden="true">↗</span>
+        </button>
+      </div>
+    </aside>
+    <div class="screen-notes">
+      <p>
+        <strong>Drie A4-pagina’s: eten, drankbar en jeneverbar.</strong> Klik op
+        ‘Tekst &amp; prijzen aanpassen’ om namen en prijzen te wijzigen.
+      </p>
+      <p>
+        A4 · staand · schaal 100% · marges: geen · achtergrondafbeeldingen aan ·
+        kop- en voetteksten uit.
+      </p>
+      <p id="edit-help" hidden>
+        Blauwe kaders zijn bewerkbaar. Houd teksten kort zodat alles op A4 past.
+        Gebruik ‘Bewaar mijn HTML’ om je ingevulde versie te downloaden.
+      </p>
+      <p id="status" role="status" aria-live="polite"></p>
+    </div>
+
+    <!-- Alle illustraties zijn vectoren, zodat ook de PDF scherp blijft. -->
+    <svg
+      class="svg-library"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <defs>
+        <symbol id="snowflake" viewBox="0 0 30 30">
+          <g
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.4"
+            stroke-linecap="round"
+          >
+            <path
+              d="M15 2v26M3.7 8.5l22.6 13M3.7 21.5l22.6-13M11.5 5.5L15 9l3.5-3.5M11.5 24.5L15 21l3.5 3.5M5.2 12.3L10 11l-1.3-4.7M21.3 23.7L20 19l4.8-1.3M5.2 17.7L10 19l-1.3 4.7M21.3 6.3L20 11l4.8 1.3"
+            />
+          </g>
+        </symbol>
+        <symbol id="winter-logo" viewBox="0 0 720 150">
+          <defs>
+            <clipPath id="logo-letters">
+              <text
+                x="360"
+                y="124"
+                text-anchor="middle"
+                textLength="672"
+                lengthAdjust="spacingAndGlyphs"
+                font-family="Impact, Haettenschweiler, 'Arial Narrow', sans-serif"
+                font-size="127"
+                font-weight="900"
+              >
+                WINTER BBQ
+              </text>
+            </clipPath>
+          </defs>
+          <text
+            x="360"
+            y="124"
+            text-anchor="middle"
+            textLength="672"
+            lengthAdjust="spacingAndGlyphs"
+            font-family="Impact, Haettenschweiler, 'Arial Narrow', sans-serif"
+            font-size="127"
+            font-weight="900"
+            fill="#df080d"
+            stroke="#fff"
+            stroke-width="13"
+            stroke-linejoin="round"
+            paint-order="stroke"
+          >
+            WINTER BBQ
+          </text>
+          <g clip-path="url(#logo-letters)" fill="#fff">
+            <path
+              d="M0 0H720V40l-12-8-12 7-8-10-10 8-9-3-9 20-8-18-13 5-9-11-12 7-12-8-10 12-10-6-9 27-9-20-10 5-12-14-12 5-9-10-10 5-12-4-9 30-11-17-11 6-10-14-12 5-10-6-10 11-12-6-9 24-8-17-12 4-10-14-13 7-9-9-11 6-9-4-12 25-10-15-11 5-11-13-10 6-10-8-12 6-10-4-9 27-11-18-10 6-10-14-12 6-11-9-11 7-10-4-11 24-10-17-10 5-12-13-10 6-10-9-13 7-12-5-9 24-9-16-11 4-11-10-12 6-10-7-10 6-10-4-11 22-10-16-11 5-10-12-12 6-10-8-12 6-10-4-9 20-11-15-12 4-10-12-11 5-10-6Z"
+            />
+            <path
+              d="M77 40q-3 22 2 27t4-10l-1-17M291 40q-4 14 0 23t5-2V40M562 40q-3 19 1 24t4-5V40"
+            />
+          </g>
+        </symbol>
+        <symbol id="snowman" viewBox="0 0 280 300">
+          <g
+            stroke="#292522"
+            stroke-width="4"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M74 216L17 173m18 14-5-23m174 47 50-46m-18 16 22 1"
+              fill="none"
+            />
+            <path
+              d="M68 285c-20-43-10-104 28-125 22-15 64-10 82 7 29 23 40 79 25 118"
+              fill="#fff"
+            />
+            <path
+              d="M61 115c-5-33 12-64 47-74s77 3 88 34c13 34-4 71-34 83-39 15-93-5-101-43Z"
+              fill="#fff"
+            />
+            <path
+              d="M65 115c-7-39 14-65 50-71m-40 82c17 29 58 38 86 25m-91 37c-19 34-14 73-8 91"
+              fill="none"
+              stroke-width="1.5"
+            />
+            <path
+              d="M74 58 67 11l67-10 15 46 20 1 2 9-111 19-5-8Z"
+              fill="#8d785e"
+            />
+            <path d="m71 36 69-12 7 17-72 13" fill="#473f34" stroke="none" />
+            <path
+              d="M67 18q17-6 27-4"
+              fill="none"
+              stroke="#fff"
+              stroke-width="5"
+            />
+            <path d="M91 149q33 13 70-5l12 25q-34 17-78 6Z" fill="#df080d" />
+            <path d="M155 164q19 26 53 31l-11 24q-38-5-58-43" fill="#df080d" />
+            <path d="M145 171q2 41 26 64l-23 14q-26-26-28-71" fill="#df080d" />
+            <path
+              d="m148 231 9 12m4-19 9 11m24-23 5-10m-16 6 6-10"
+              fill="none"
+              stroke-width="2"
+            />
+            <circle cx="93" cy="100" r="4" fill="#292522" stroke="none" />
+            <circle cx="157" cy="91" r="4" fill="#292522" stroke="none" />
+            <path d="m119 110 38 6-29 14Z" fill="#d6741b" />
+            <path d="m129 114 3 9m8-7 2 4" fill="none" stroke-width="1.5" />
+            <path d="M93 124q15 21 31 17" fill="none" stroke-width="2.5" />
+            <ellipse
+              cx="113"
+              cy="215"
+              rx="9"
+              ry="11"
+              fill="#292522"
+              transform="rotate(22 113 215)"
+            />
+            <ellipse
+              cx="119"
+              cy="258"
+              rx="9"
+              ry="11"
+              fill="#292522"
+              transform="rotate(-16 119 258)"
+            />
+            <path d="m110 212 4-3m3 49 4-3" stroke="#fff" stroke-width="2" />
+          </g>
+        </symbol>
+        <symbol id="sausage-fork" viewBox="0 0 100 220">
+          <g stroke="#292522" stroke-width="3" stroke-linejoin="round">
+            <path d="M46 205 54 62 62 24l3 40-6 143Z" fill="#d0d0cd" />
+            <path d="M47 149 60 150 58 207q-9 15-15-1Z" fill="#969997" />
+            <path
+              d="M10 34Q37 54 83 50q15-1 14-15-2-12-14-11-32 4-59-12Q7 2 4 17q-2 9 6 17Z"
+              fill="#df080d"
+            />
+            <path
+              d="m23 15 1 23m18-16 2 23m19-18 2 22m17-23 2 21"
+              stroke="#9d1114"
+              stroke-width="4"
+            />
+            <path
+              d="m14 18 7 3m48 11 11 1"
+              stroke="#fff"
+              stroke-width="3"
+              stroke-linecap="round"
+            />
+          </g>
+        </symbol>
+        <symbol id="winter-mug" viewBox="0 0 150 145">
+          <g
+            stroke="#292522"
+            stroke-width="4"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M105 56h17q28 0 19 31-7 19-32 17"
+              fill="none"
+              stroke="#fff"
+              stroke-width="12"
+            />
+            <path d="M105 56h17q28 0 19 31-7 19-32 17" fill="none" />
+            <path d="M23 45h87l-4 66q-37 25-77 0Z" fill="#df080d" />
+            <ellipse cx="66" cy="44" rx="44" ry="10" fill="#b78a5b" />
+            <path
+              d="M27 42q4-9 13-4 8-9 15-2 13-9 20-1 13-7 18 1 12-1 16 6"
+              fill="none"
+              stroke="#fff"
+              stroke-width="7"
+            />
+            <path
+              d="M48 23q-10-9 0-18m22 18q-10-9 0-18m22 18q-10-9 0-18"
+              fill="none"
+              stroke="#fff"
+              stroke-width="3"
+            />
+            <path
+              d="M14 124q50 12 105-1"
+              fill="none"
+              stroke="#fff"
+              stroke-width="7"
+            />
+          </g>
+          <use
+            href="#snowflake"
+            x="48"
+            y="63"
+            width="36"
+            height="36"
+            color="#fff"
+          />
+        </symbol>
+      </defs>
+    </svg>
+
+    <main class="sheets" aria-label="Afdrukbare prijslijsten">
+      <!-- PAGINA 1: ETEN. Wijzig de teksten hieronder of gebruik de bewerkknop. -->
+      <article class="sheet food-sheet" aria-labelledby="food-title">
+        <div class="snow-speckles" aria-hidden="true"></div>
+        <div class="page-frame" aria-hidden="true"></div>
+        <header class="page-header">
+          <p class="organiser">CHIRO TISSELT <span>PRESENTEERT</span></p>
+          <svg class="event-logo" role="img" aria-label="Winter BBQ">
+            <use href="#winter-logo"></use>
+          </svg>
+          <div class="title-line">
+            <svg aria-hidden="true"><use href="#snowflake"></use></svg
+            ><span>PRIJSLIJST</span
+            ><svg aria-hidden="true"><use href="#snowflake"></use></svg>
+          </div>
+          <h1 id="food-title">ETEN</h1>
+          <p class="tagline" data-editable="food-tagline">
+            VAN DE GRILL. VOOR DE GEZELLIGHEID.
+          </p>
+        </header>
+        <div class="menu food-menu">
+          <section class="menu-section" aria-labelledby="grill-title">
+            <h2 class="wood-label" id="grill-title">
+              <span data-editable="food-section-1">Lekker van de BBQ</span>
+            </h2>
+            <div class="menu-row">
+              <span class="item-name" data-editable="food-name-1"
+                >Groentjes en slaatje</span
+              ><span class="leader" aria-hidden="true"></span
+              ><span class="price" data-editable="food-price-1">€ …,…</span>
+            </div>
+            <div class="menu-row">
+              <span class="item-name" data-editable="food-name-2"
+                >Een vleesje/Veggie</span
+              ><span class="leader" aria-hidden="true"></span
+              ><span class="price" data-editable="food-price-2">€ …,…</span>
+            </div>
+            <div class="menu-row">
+              <span class="item-name" data-editable="food-name-3"
+                >Verse Haring</span
+              ><span class="leader" aria-hidden="true"></span
+              ><span class="price" data-editable="food-price-3">€ …,…</span>
+            </div>
+          </section>
+          <section class="menu-section" aria-labelledby="extra-title">
+            <h2 class="wood-label" id="extra-title">
+              <span data-editable="food-section-2">Een dessertje</span>
+            </h2>
+            <div class="menu-row">
+              <span class="item-name" data-editable="food-name-4"
+                >Rijstpap/Chocomouse</span
+              ><span class="leader" aria-hidden="true"></span
+              ><span class="price" data-editable="food-price-4">€ …,…</span>
+            </div>
+            <div class="menu-row">
+              <span class="item-name" data-editable="food-name-5"
+                >Stukje taart</span
+              ><span class="leader" aria-hidden="true"></span
+              ><span class="price" data-editable="food-price-5">€ …,…</span>
+            </div>
+          </section>
+        </div>
+        <footer class="winter-footer">
+          <svg
+            class="snow-drift"
+            viewBox="0 0 800 180"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M0 72Q140 32 300 77T580 71T800 60V180H0Z"
+              fill="#fff"
+            ></path>
+            <path d="M260 125Q500 85 800 118V180H200Z" fill="#eeefed"></path>
+          </svg>
+          <svg class="footer-snowman" aria-hidden="true">
+            <use href="#snowman"></use>
+          </svg>
+          <svg class="footer-fork" aria-hidden="true">
+            <use href="#sausage-fork"></use>
+          </svg>
+          <div class="footer-sign">
+            <span>28 NOVEMBER 2026</span
+            ><strong data-editable="food-footer">SMAKELIJK!</strong
+            ><span>CHIRO TISSELT</span>
+          </div>
+        </footer>
+      </article>
+
+      <!-- PAGINA 2: DRANK AAN DE BAR. -->
+      <article class="sheet drinks-sheet bar-sheet" aria-labelledby="bar-title">
+        <div class="snow-speckles" aria-hidden="true"></div>
+        <div class="page-frame" aria-hidden="true"></div>
+        <header class="page-header">
+          <p class="organiser">CHIRO TISSELT <span>PRESENTEERT</span></p>
+          <svg class="event-logo" role="img" aria-label="Winter BBQ">
+            <use href="#winter-logo" />
+          </svg>
+          <div class="title-line">
+            <svg aria-hidden="true"><use href="#snowflake" /></svg
+            ><span>PRIJSLIJST</span
+            ><svg aria-hidden="true"><use href="#snowflake" /></svg>
+          </div>
+          <h1 id="bar-title">DRANKBAR</h1>
+          <p class="tagline" data-editable="bar-tagline">
+            IETS FRIS. EEN BIERTJE. EEN WIJNTJE. SCHOL!
+          </p>
+        </header>
+        <div class="menu drinks-menu bar-menu">
+          <section class="menu-section" aria-labelledby="bar-soft-title">
+            <h2 class="wood-label" id="bar-soft-title">
+              <span data-editable="bar-soft-heading"
+                >Fris &amp; alcoholvrij</span
+              >
+            </h2>
+            <div class="menu-row">
+              <span class="item-name" data-editable="bar-water-name"
+                >Water plat / bruis</span
+              ><span class="leader" aria-hidden="true"></span
+              ><span class="price" data-editable="bar-water-price">€ …,…</span>
+            </div>
+            <div class="menu-row">
+              <span class="item-name" data-editable="bar-cola-name"
+                >Cola / Cola Zero</span
+              ><span class="leader" aria-hidden="true"></span
+              ><span class="price" data-editable="bar-cola-price">€ …,…</span>
+            </div>
+            <div class="menu-row">
+              <span class="item-name" data-editable="bar-softdrink-name"
+                >Limonade / Ice Tea</span
+              ><span class="leader" aria-hidden="true"></span
+              ><span class="price" data-editable="bar-softdrink-price"
+                >€ …,…</span
+              >
+            </div>
+            <div class="menu-row">
+              <span class="item-name" data-editable="bar-fruit-name"
+                >Vruchtendrankjes</span
+              ><span class="leader" aria-hidden="true"></span
+              ><span class="price" data-editable="bar-fruit-price">€ …,…</span>
+            </div>
+          </section>
+          <section class="menu-section" aria-labelledby="bar-alcohol-title">
+            <h2 class="wood-label" id="bar-alcohol-title">
+              <span data-editable="bar-alcohol-heading"
+                >Biertjes &amp; wijntjes</span
+              >
+            </h2>
+            <div class="menu-row">
+              <span class="item-name" data-editable="bar-beer-name"
+                >Biertjes</span
+              ><span class="leader" aria-hidden="true"></span
+              ><span class="price" data-editable="bar-beer-price">€ …,…</span>
+            </div>
+            <div class="menu-row">
+              <span class="item-name" data-editable="bar-wine-name"
+                >Wijn wit / rood / rosé</span
+              ><span class="leader" aria-hidden="true"></span
+              ><span class="price" data-editable="bar-wine-price">€ …,…</span>
+            </div>
+            <div class="menu-row">
+              <span class="item"
+                ><span class="item-name" data-editable="bar-beer-name"
+                  >Sterke biertjes</span
+                ><span class="item-note" data-editable="bar-beer-note"
+                  >Keuze uit verschillende sterke biertjes</span
+                ></span
+              ><span class="leader" aria-hidden="true"></span
+              ><span class="price" data-editable="bar-beer-price">€ …,…</span>
+            </div>
+          </section>
+        </div>
+        <footer class="winter-footer">
+          <svg
+            class="snow-drift"
+            viewBox="0 0 800 180"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <path d="M0 72Q140 32 300 77T580 71T800 60V180H0Z" fill="#fff" />
+            <path d="M260 125Q500 85 800 118V180H200Z" fill="#eeefed" />
+          </svg>
+          <svg class="footer-snowman" aria-hidden="true">
+            <use href="#snowman" />
+          </svg>
+          <svg class="footer-mug" aria-hidden="true">
+            <use href="#winter-mug" />
+          </svg>
+          <div class="footer-sign">
+            <span>28 NOVEMBER 2026</span
+            ><strong data-editable="bar-footer">SCHOL!</strong
+            ><span>CHIRO TISSELT</span>
+          </div>
+        </footer>
+      </article>
+
+      <!-- PAGINA 3: JENEVERBAR. -->
+      <article class="sheet jenever-sheet" aria-labelledby="jenever-title">
+        <div class="snow-speckles" aria-hidden="true"></div>
+        <div class="page-frame" aria-hidden="true"></div>
+        <header class="page-header">
+          <p class="organiser">CHIRO TISSELT <span>PRESENTEERT</span></p>
+          <svg class="event-logo" role="img" aria-label="Winter BBQ">
+            <use href="#winter-logo" />
+          </svg>
+          <div class="title-line">
+            <svg aria-hidden="true"><use href="#snowflake" /></svg
+            ><span>PRIJSLIJST</span
+            ><svg aria-hidden="true"><use href="#snowflake" /></svg>
+          </div>
+          <h1 id="jenever-title">JENEVERBAR</h1>
+          <p class="tagline" data-editable="jenever-tagline">
+            SHOTJES & WARME DRANKEN
+          </p>
+        </header>
+        <div class="menu drinks-menu jenever-menu">
+          <section class="menu-section" aria-labelledby="jenever-shots-title">
+            <h2 class="wood-label" id="jenever-shots-title">
+              <span data-editable="jenever-shots-heading">Shotjes</span>
+            </h2>
+            <div class="menu-row">
+              <span class="item"
+                ><span class="item-name" data-editable="jenever-gin-name"
+                  >Jenever</span
+                ><span class="item-note" data-editable="jenever-gin-note"
+                  >Keuze uit 12 verschillende smaken</span
+                ></span
+              ><span class="leader" aria-hidden="true"></span
+              ><span class="price" data-editable="jenever-gin-price"
+                >€ …,…</span
+              >
+            </div>
+            <div class="menu-row">
+              <span class="item-name" data-editable="jenever-jager-name"
+                >Jägermeister</span
+              ><span class="leader" aria-hidden="true"></span
+              ><span class="price" data-editable="jenever-jager-price"
+                >€ …,…</span
+              >
+            </div>
+            <div class="menu-row">
+              <span class="item-name" data-editable="jenever-amaretto-name"
+                >Amaretto</span
+              ><span class="leader" aria-hidden="true"></span
+              ><span class="price" data-editable="jenever-amaretto-price"
+                >€ …,…</span
+              >
+            </div>
+          </section>
+          <section class="menu-section" aria-labelledby="jenever-warm-title">
+            <h2 class="wood-label" id="jenever-warm-title">
+              <span data-editable="jenever-warm-heading">Lekker opwarmen</span>
+            </h2>
+            <div class="menu-row">
+              <span class="item-name" data-editable="jenever-gluhwein-name"
+                >Glühwein</span
+              ><span class="leader" aria-hidden="true"></span
+              ><span class="price" data-editable="jenever-gluhwein-price"
+                >€ …,…</span
+              >
+            </div>
+            <div class="menu-row">
+              <span class="item-name" data-editable="jenever-tea-name"
+                >Thee</span
+              ><span class="leader" aria-hidden="true"></span
+              ><span class="price" data-editable="jenever-tea-price"
+                >€ …,…</span
+              >
+            </div>
+            <div class="menu-row">
+              <span class="item-name" data-editable="jenever-coffee-name"
+                >Koffie</span
+              ><span class="leader" aria-hidden="true"></span
+              ><span class="price" data-editable="jenever-coffee-price"
+                >€ …,…</span
+              >
+            </div>
+            <div class="menu-row">
+              <span class="item-name" data-editable="jenever-chocolate-name"
+                >Chocomelk met slagroom</span
+              ><span class="leader" aria-hidden="true"></span
+              ><span class="price" data-editable="jenever-chocolate-price"
+                >€ …,…</span
+              >
+            </div>
+          </section>
+          <section class="menu-section" aria-labelledby="jenever-combos-title">
+            <h2 class="wood-label" id="jenever-combos-title">
+              <span data-editable="jenever-combos-heading"
+                >Chocomelk met een extraatje</span
+              >
+            </h2>
+            <div class="menu-row">
+              <span class="item-name" data-editable="jenever-choco-jager-name"
+                >Chocomelk + Jägermeister</span
+              ><span class="leader" aria-hidden="true"></span
+              ><span class="price" data-editable="jenever-choco-jager-price"
+                >€ …,…</span
+              >
+            </div>
+            <div class="menu-row">
+              <span
+                class="item-name"
+                data-editable="jenever-choco-amaretto-name"
+                >Chocomelk + amaretto</span
+              ><span class="leader" aria-hidden="true"></span
+              ><span class="price" data-editable="jenever-choco-amaretto-price"
+                >€ …,…</span
+              >
+            </div>
+            <p class="section-note" data-editable="jenever-combos-note">
+              Ook deze combinaties worden geserveerd met slagroom.
+            </p>
+          </section>
+        </div>
+        <footer class="winter-footer">
+          <svg
+            class="snow-drift"
+            viewBox="0 0 800 180"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <path d="M0 72Q140 32 300 77T580 71T800 60V180H0Z" fill="#fff" />
+            <path d="M260 125Q500 85 800 118V180H200Z" fill="#eeefed" />
+          </svg>
+          <svg class="footer-snowman" aria-hidden="true">
+            <use href="#snowman" />
+          </svg>
+          <svg class="footer-mug" aria-hidden="true">
+            <use href="#winter-mug" />
+          </svg>
+          <div class="footer-sign">
+            <span>28 NOVEMBER 2026</span
+            ><strong data-editable="jenever-footer">SHOTJES!</strong
+            ><span>CHIRO TISSELT</span>
+          </div>
+        </footer>
+      </article>
+    </main>
+    <script>
+      /* Alleen voor bewerken, bewaren en de afdrukknop; de opmaak werkt zonder JS. */
+      (() => {
+        const editable = [...document.querySelectorAll("[data-editable]")];
+        const status = document.getElementById("status");
+        const editButton = document.getElementById("edit-button");
+        const storageKey = "chiro-tisselt-winterbbq-2026-v2";
+        let editing = false;
+        let timer;
+
+        function values() {
+          return Object.fromEntries(
+            editable.map((el) => [el.dataset.editable, el.textContent]),
+          );
+        }
+
+        function checkLayout() {
+          let overflow = false;
+          document.querySelectorAll(".sheet").forEach((sheet) => {
+            const menu = sheet.querySelector(".menu").getBoundingClientRect();
+            const footer = sheet
+              .querySelector(".winter-footer")
+              .getBoundingClientRect();
+            const rowsTooWide = [...sheet.querySelectorAll(".menu-row")].some(
+              (row) => row.scrollWidth > row.clientWidth + 1,
+            );
+            const tooLarge = menu.bottom > footer.top - 3 || rowsTooWide;
+            sheet.classList.toggle("layout-warning", tooLarge);
+            overflow ||= tooLarge;
+          });
+          status.textContent = overflow
+            ? "Deze tekst is te lang voor het blad. Kort een productnaam in of pas de CSS aan vóór het afdrukken."
+            : "";
+          return !overflow;
+        }
+
+        function storeEdits() {
+          try {
+            localStorage.setItem(storageKey, JSON.stringify(values()));
+          } catch {
+            /* Bewaren als HTML blijft beschikbaar. */
+          }
+          checkLayout();
+        }
+
+        // Een gedownloade, ingevulde HTML krijgt voorrang op eventueel oudere lokale data.
+        if (!document.documentElement.hasAttribute("data-saved-copy")) {
+          try {
+            const saved = JSON.parse(localStorage.getItem(storageKey) || "{}");
+            editable.forEach((el) => {
+              if (typeof saved[el.dataset.editable] === "string")
+                el.textContent = saved[el.dataset.editable];
+            });
+          } catch {
+            /* De prijslijst werkt ook wanneer browseropslag niet beschikbaar is. */
+          }
+        }
+
+        editable.forEach((el) => {
+          el.addEventListener("input", () => {
+            clearTimeout(timer);
+            timer = setTimeout(storeEdits, 180);
+          });
+          el.addEventListener("keydown", (event) => {
+            if (event.key === "Enter") {
+              event.preventDefault();
+              el.blur();
+            }
+          });
+          el.addEventListener("paste", (event) => {
+            event.preventDefault();
+            const text = (event.clipboardData || window.clipboardData)
+              .getData("text")
+              .replace(/[\r\n]+/g, " ");
+            const selection = window.getSelection();
+            if (!selection.rangeCount) return;
+            const range = selection.getRangeAt(0);
+            range.deleteContents();
+            const node = document.createTextNode(text);
+            range.insertNode(node);
+            range.setStartAfter(node);
+            range.collapse(true);
+            selection.removeAllRanges();
+            selection.addRange(range);
+            storeEdits();
+          });
+        });
+
+        editButton.addEventListener("click", () => {
+          editing = !editing;
+          document.body.classList.toggle("editing", editing);
+          editButton.setAttribute("aria-pressed", String(editing));
+          editButton.textContent = editing
+            ? "Klaar met aanpassen"
+            : "Tekst & prijzen aanpassen";
+          document.getElementById("edit-help").hidden = !editing;
+          editable.forEach((el) => {
+            el.contentEditable = editing ? "plaintext-only" : "false";
+            if (editing) {
+              el.setAttribute("role", "textbox");
+              el.setAttribute(
+                "aria-label",
+                el.classList.contains("price")
+                  ? "Prijs aanpassen"
+                  : "Tekst aanpassen",
+              );
+            } else {
+              el.removeAttribute("role");
+              el.removeAttribute("aria-label");
+            }
+          });
+          if (editing) editable[0].focus();
+          else storeEdits();
+        });
+
+        document
+          .getElementById("print-button")
+          .addEventListener("click", () => {
+            if (checkLayout()) window.print();
+            else status.scrollIntoView({ behavior: "smooth", block: "center" });
+          });
+
+        document
+          .getElementById("save-button")
+          .addEventListener("click", async () => {
+            const button = document.getElementById("save-button");
+            button.disabled = true;
+            try {
+              storeEdits();
+              const copy = document.documentElement.cloneNode(true);
+              copy.setAttribute("data-saved-copy", "true");
+              copy.querySelector("body").classList.remove("editing");
+              copy
+                .querySelector("#edit-button")
+                .setAttribute("aria-pressed", "false");
+              copy.querySelector("#edit-button").textContent =
+                "Tekst & prijzen aanpassen";
+              copy.querySelector("#save-button").disabled = false;
+              copy.querySelector("#edit-help").hidden = true;
+              copy.querySelector("#status").textContent = "";
+              copy.querySelectorAll("[data-editable]").forEach((el) => {
+                el.removeAttribute("contenteditable");
+                el.removeAttribute("role");
+                el.removeAttribute("aria-label");
+              });
+              // De losse bronversie wordt bij bewaren ook één zelfstandig HTML-bestand.
+              const css = copy.querySelector('link[rel="stylesheet"]');
+              if (css) {
+                const result = await fetch(css.href);
+                if (!result.ok) throw new Error("CSS laden is mislukt.");
+                const style = document.createElement("style");
+                style.textContent = await result.text();
+                css.replaceWith(style);
+              }
+              const script = copy.querySelector("script[src]");
+              if (script) {
+                const result = await fetch(script.src);
+                if (!result.ok) throw new Error("JavaScript laden is mislukt.");
+                const inline = document.createElement("script");
+                inline.textContent = await result.text();
+                script.remove();
+                copy.querySelector("body").append(inline);
+              }
+              const blob = new Blob(["<!doctype html>\n" + copy.outerHTML], {
+                type: "text/html;charset=utf-8",
+              });
+              const url = URL.createObjectURL(blob);
+              const link = document.createElement("a");
+              link.href = url;
+              link.download = "WinterBBQ_prijslijsten_ingevuld.html";
+              link.click();
+              setTimeout(() => URL.revokeObjectURL(url), 2000);
+              status.textContent =
+                "Je ingevulde HTML is gedownload. Open dat bestand om later verder te werken of af te drukken.";
+            } catch {
+              status.textContent =
+                "Bewaren lukt hier niet. Open het zelfstandige bestand WinterBBQ_prijslijsten.html en probeer opnieuw.";
+            } finally {
+              button.disabled = false;
+            }
+          });
+
+        window.addEventListener("beforeprint", () => {
+          if (document.activeElement instanceof HTMLElement)
+            document.activeElement.blur();
+        });
+        window.addEventListener("resize", checkLayout);
+        if (document.fonts) document.fonts.ready.then(checkLayout);
+        else checkLayout();
+      })();
+    </script>
+  </body>
+</html>
